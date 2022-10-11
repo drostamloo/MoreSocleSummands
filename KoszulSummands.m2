@@ -79,3 +79,25 @@ elapsedTime tally for i in L list isGolod(R/i)
 G = select(L, l -> isGolod(R/l) and not isBurch(l));
 elapsedTime tally for i in G list koszulSS(R/i)
 elapsedTime tally for i in G list kSS(R/i, 5)
+
+
+-----------------
+needsPackage "DGAlgebras"
+S = ZZ/101[a,b]
+mS = ideal vars S
+R = S/(mS^3)
+
+
+n = numgens R
+mmR = ideal vars R
+K = koszulComplexDGA R
+L = toComplex K
+A = K.natural
+soc = apply(n, i-> gens ((0_R*L_(i+1)):mmR))
+cyc = apply(n, i-> syz K.dd_(i+1))
+socSummands = apply(n, i-> soc_i%(vars R**cyc_i))
+
+cyc_0*(soc_0//cyc_0)
+soc_0%(vars R ** cyc_0)
+(dgAlgebraMultMap(K,A_1))_1*socSummands_0
+((dgAlgebraMultMap(K,A_1))_1*socSummands_0)%(vars R **cyc_1)
