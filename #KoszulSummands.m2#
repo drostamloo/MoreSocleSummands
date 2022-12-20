@@ -44,12 +44,16 @@ isSocAlg(Ring, Ideal) := (S, I) -> (
     cyc := apply(n, i-> syz K.dd_(i+1));
     socSummands := apply(n, i-> soc_i%(vars R**cyc_i));
     
-    alg := apply(n, i -> ((dgAlgebraMultMap(K,A_1))_i*socSummands_i)%(vars R **cyc_i))
+    alg := apply(n, j -> apply(n, i -> ((dgAlgebraMultMap(K,A_j))_(i+1)*socSummands_i)));
+
+    inj := apply(n, j -> apply(n-1, i -> (alg_j)_i % (vars R**cyc_(i+1))));
     
-    bool := apply(n, i -> alg_i == 0)
+    surj := apply(n, j -> apply(n-1, i -> (alg_j)_i // socSummands_(i+1)));
     
-    dom1 := ring 
-    )
+    for i from 0 to n-1 do 
+    
+    
+)
 
 
 beginDocumentation()
@@ -104,7 +108,7 @@ elapsedTime tally for i in G list kSS(R/i, 5)
 
 -----------------
 needsPackage "DGAlgebras"
-S = ZZ/101[a,b]
+S = ZZ/101[a,b,c]
 mS = ideal vars S
 R = S/(mS^3)
 
@@ -117,19 +121,33 @@ A = K.natural
 vars A
 soc = apply(n, i-> gens ((0_R*L_(i+1)):mmR))
 soc_0
+K.dd
 cyc = apply(n, i-> syz K.dd_(i+1))
 socSummands = apply(n, i-> soc_i%(vars R**cyc_i))
-target socSummands_0 == K_1
+socSummands_0
+prune image socSummands_1
+soc_1
+target socSummands_0
 
 cyc_0*(soc_0//cyc_0)
 soc_0%(vars R ** cyc_0)
 -- what is the purpose of this?
 
 (dgAlgebraMultMap(K,A_1))_1*socSummands_0
-inj0 = ((dgAlgebraMultMap(K,A_1))_1*socSummands_0)%(vars R **cyc_1)
+((dgAlgebraMultMap(K,A_1))_1*socSummands_0)%(vars R **cyc_1)
+(dgAlgebraMultMap(K,A_1))_2
 
 inj0 = ((dgAlgebraMultMap(K,A_0))_1*socSummands_0)%(vars R **cyc_1)
 inj1 = ((dgAlgebraMultMap(K,A_1))_1*socSummands_0)%(vars R **cyc_1)
+inj = inj0 || inj1
+ker inj
+
+surj0 = ((dgAlgebraMultMap(K,A_0))_1*socSummands_0) // socSummands_1
+surj1 = ((dgAlgebraMultMap(K,A_1))_1*socSummands_0) // socSummands_1
+surj = surj0 | surj1
+coker surj
+
+
 -- what is going on with indexing here? why reduce by cyc again in the second line?
 -- Reduce by cyc in the second line to check whether we get a nonzero socle summand
 
@@ -157,7 +175,3 @@ dom2 = image socSummands_0
 tar2 = (image socSummands_1)^2
 
 -- another question: surjectivity on socles implies surjectivity of socle summands, so does it suffice for us to check the second one only?
-
-
-
-viewHelp dgAlgebraMultMap
