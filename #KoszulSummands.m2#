@@ -12,7 +12,7 @@ newPackage(
 	DebuggingMode => true)
     
 export{
-    "koszulIdeals", "koszulSS"
+    "koszulIdeals", "koszulSS", "randomBinomialIdeals", "killCycleComplexes", "complexSocSummands", "separateDiffs", "subrows", "restrictTarget", "cycleSummands"
     }
 
 -- return a list of ideals given by the matrices of the koszul complex of a 
@@ -28,7 +28,6 @@ koszulSS = method()
 koszulSS(Ring) := (R) -> (
     K := koszulIdeals(R);
     L := for i in toList(0..length K - 1) list if hasSocleSummand(K_i) then i+2 else continue
-    
     )
 
 isSocAlg = method()
@@ -50,11 +49,119 @@ isSocAlg(Ring, Ideal) := (S, I) -> (
     
     surj := apply(n, j -> apply(n-1, i -> (alg_j)_i // socSummands_(i+1)));
     
-    for i from 0 to n-1 do 
-    
-    
+    )
+
+-- new method: only need to check the image of the socles in the homology
+-- idea: soc % image =/= 0 implies (maximal) socle summand
+
+isSocAlgebra = method()
+isSocAlgebra(Ring, Ideal) := (S, I) -> (
+    mS := ideal vars S;
+    R := S/I;
+    n := numgens R;
+    mmR := ideal vars R;
+    K := koszulComplexDGA R;
+    L := toComplex K;
+    A := K.natural;
+    soc := apply(n, i-> gens ((0_R*L_(i+1)):mmR));
+    cyc := HH K;
+    socSummands := apply(n, i-> soc_i // HH_i)
 )
 
+-*
+killedCycleSummands = method()
+killedCycleSummands(Ring, Ideal) := (S, I) -> (
+    n := numgens S;
+    R := S/I;
+    K := koszulComplexDGA R;
+    
+    K1 := killCycles(K, EndDegree => 1);
+    K2 := killCycles(K1, EndDegree => 2);
+    K3 := killCycles(K2, EndDegree => 3);
+    K4 := killCycles(K3, EndDegree => 4);
+    K5 := killCycles(K4, EndDegree => 5);
+    K6 := killCycles(K5, EndDegree => 6);
+    
+    C := toComplex(K6, 6);
+ 
+    cyc := apply(6, i -> syz C.dd_(i+1));
+    L := for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else continue
+)
+*-
+killCycleComplexes = method()
+killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
+    n := numgens S;
+    R := S/I;
+    K := koszulComplexDGA R;
+    K' := K;
+    
+    KK := for i from 0 to m list (
+	if i==0 then K' else K' = killCycles(K', EndDegree => i));
+    
+    C := KK / (K -> toComplex(K, 5))
+    -- L := for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else continue
+)
+
+randomBinomialIdeals = method()
+randomBinomialIdeals(Ring, ZZ, ZZ, ZZ) := (R, maxdeg, maxnumgen, numideals) -> (     
+           mm := ideal gens R;
+	   
+	   for j from 1 to numideals list(
+	       ideal for i from 1 to random(1, maxnumgen) list(
+		   d := random maxdeg;
+	   	   mmd := (mm^d)_*;
+		   t := #mmd;
+		   m1 := mmd_(random t) * mmd_(random t);
+		   m2 := mmd_(random t) * mmd_(random t);
+		   b := m1-m2))
+	   )
+       
+complexSocSummands = method()
+complexSocSummands(ChainComplex) := (K) -> (
+    cyc := for i from 1 to length K list syz K.dd_i;
+    for i from 1 to length K-1 list if hasSocleSummand(image cyc_i) then i+2 else continue
+    )
+		  
+		  
+separateDiffs = method()
+separateDiffs(ChainComplex, ChainComplex) := (K1, K2) -> (
+    d1 := K1.dd;
+    d2 := K2.dd;
+    
+    ddiffs := apply(length K2-1, i -> submatrix(d2_(i+1), toList(numcols d1_(i+1) .. numcols d2_(i+1) - 1)))
+)
+
+restrictTarget = method()
+restrictTarget(ChainComplex, ChainComplex) := (K1, K2) -> (
+    d1 := K1.dd;
+    d2 := K2.dd;
+    
+    restricted := apply(length K2-1, i -> subrows(d2_(i+1), toList(0 .. numrows d1_(i+1) - 1)))
+)
+
+subrows = method()
+subrows(Matrix, List) := (M, rows) -> (
+    transpose submatrix(transpose M, rows)
+)
+
+originalDiffs = method()
+originalDiffs(ChainComplex, ChainComplex) := (K1, K2) -> (
+    d1 := K1.dd;
+    d2 := K2.dd;
+    
+    ddiffs := apply(length K2-1, i -> submatrix(d2_(i+1), toList(0 .. numcols d1_(i+1) - 1)))
+)
+-*
+separateDiffs(KK_0, KK_1, diffs)
+*-
+
+cycleSummands = method(Options => {Verbose => false})
+cycleSummands(ChainComplex) := o -> K -> (
+    c := length K;
+    mm := ideal gens ring K;
+    cycles := for i from 1 to c list image syz K.dd_i;
+    for i from 1 to c list socleSummands(cycles_(i-1), o)
+)
 
 beginDocumentation()
 
@@ -80,7 +187,7 @@ koszulSS(R)
 kSS(P/I, 6)
 
 -- To do: decrease -5 until finding a nonBurch Golod ring
-L = orbitRepresentatives(S, I, monomialIdeal J, -6); #L
+L = orbitRepresentatives(S, I, monomialIdeal J, -5); #L
 
 elapsedTime tally for i in L_{0..1000} list koszulSS(S/i)
 elapsedTime tally for i in L_{0..1000} list kSS(S/i, 6)
@@ -92,7 +199,7 @@ select(L, l -> koszulSS(S/l)_0 == 0);
 
 -- Conjecture 1: Every Burch ring has socle summands in every Koszul cycle after 2
 
-G = select(L, l -> isGolod(S/l)); #G
+G = select(L, l -> isGolod(S/l)); #G	
 
 -- To do: Randomly generate almost complete intersections, i.e. ideals with n+1 (for n vars) homogeneous generators all of the same degree, see how many are Golod. How many are Burch?
 
@@ -107,7 +214,10 @@ elapsedTime tally for i in G list kSS(R/i, 5)
 
 
 -----------------
-needsPackage "DGAlgebras"
+loadPackage ("SocleSummands", Reload => true)
+loadPackage ("MonomialOrbits", Reload => true) 
+loadPackage ("Binomials", Reload => true)
+loadPackage ("KoszulSummands", Reload => true)
 S = ZZ/101[a,b,c]
 mS = ideal vars S
 R = S/(mS^3)
@@ -147,7 +257,6 @@ surj1 = ((dgAlgebraMultMap(K,A_1))_1*socSummands_0) // socSummands_1
 surj = surj0 | surj1
 coker surj
 
-
 -- what is going on with indexing here? why reduce by cyc again in the second line?
 -- Reduce by cyc in the second line to check whether we get a nonzero socle summand
 
@@ -175,3 +284,210 @@ dom2 = image socSummands_0
 tar2 = (image socSummands_1)^2
 
 -- another question: surjectivity on socles implies surjectivity of socle summands, so does it suffice for us to check the second one only?
+
+-- now doing socle summand experiments with derived algebra resolution syzygies and koszul cycles
+kk = ZZ/(101)
+S = kk[a..d]
+S' = kk[b..d]
+project = map (S', S)
+I = ideal"a2b3,b4c3,c4,a3d2"
+J = compress (gens ((ideal vars S)^3) % I);
+
+B = randomBinomialIdeals(S,3,4,10); #B
+
+elapsedTime tally for i in B list not isBurch(i)
+elapsedTime tally for i in B list not isGolod(S/i)
+elapsedTime G = select(B, l -> not (isGolod(S/l) or isBurch(l))); #G
+G / minimalBetti
+H = apply(G, i -> i + ideal"a")
+H / minimalBetti
+G' = G / project
+G' / minimalBetti    
+G' / isBurch
+G' / isGolod
+for i in G' list isGolod(S'/i)
+koszulSS(S'/G')
+killedCycleSummands(S', G')
+
+elapsedTime tally for i in G list koszulSS(S/i)
+elapsedTime tally for i in G list killedCycleSummands(S, i)
+
+n = numgens S;
+R = S/G_0;
+K = killedCycleSummands(S, G_0, 2);
+K
+cycs = K / complexSocSummands;
+cycs
+
+K = koszulComplexDGA R;
+
+K' = K;
+m = 2;
+
+KK = for i from 0 to m list (
+	if i == 0 then K' else K' = killCycles(K', EndDegree => i));
+    
+JJ = KK / (i -> toComplex(i, 6));
+JJ / betti
+minimalBetti G_1
+
+cycs = for i from 1 to #KK list 
+L = for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else
+
+C = toComplex(K6, 6)
+
+
+cyc = apply(6, i -> syz C.dd_(i+1)); #cyc
+L = for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else continue
+
+L = orbitRepresentatives(S, I, monomialIdeal J, -3); #L
+
+elapsedTime tally for i in L list not isBurch(i)
+elapsedTime tally for i in L list isGolod(S/i)
+elapsedTime H = select(L, l -> not (isGolod(S/l) or isBurch(l))); #G
+
+elapsedTime tally for i in L list koszulSS(S/i)
+elapsedTime tally for i in L list killedCycleSummands(S, i)
+
+koszulSS(S/L_20)
+killedCycleSummands(S, L_20)
+
+------------------------------------------------------------------------------------
+loadPackage ("SocleSummands", Reload => true)
+loadPackage ("MonomialOrbits", Reload => true) 
+loadPackage ("KoszulSummands", Reload => true)
+
+-- Question: in the Burch case, how are socle summands presented in the second homological degree (and onwards) (and what are their internal degrees?)
+
+kk = ZZ/(101);
+S = kk[a..d];
+
+-- generate Burch monomial ideals
+I = ideal"a4, b4, c4, d4"
+-- J = compress (gens ((ideal vars S)^3) % I);
+L = orbitRepresentatives(S, I, (3,4,5)); #L
+B = select(L, l -> isBurch(l)); #B
+
+-- Build complexes
+KK = killCycleComplexes(S, B_0, 3);
+K = koszulComplexDGA(S/B_0)
+dgKK = killCycles(K, EndDegree => 1)
+L = toComplex(K)
+L1 = toComplex(dgKK, 4)
+
+netList apply(length L + 1, i -> L.dd_i)
+netList apply(length L1 + 1, i-> L1.dd_i)
+
+degreeLength dgKK.natural
+flatten entries vars dgKK.natural / degree
+
+socleSummands(KK_0)
+SocKK = socleSummands(KK_0, Verbose => true)
+SocKK = KK / (k -> socleSummands(k, 4, Verbose => true)
+betti KK_1
+betti KK_0
+socle (S/B_0)^1
+
+J = (ideal vars S)^3;
+
+
+-- Many examples 
+big = for i in B_{0..5} list (
+    KK = killCycleComplexes(S, i, 3);
+    bigSoc = KK / socleSummands
+    )
+
+betti KK_0
+betti KK_1
+socleSummands(KK_0, Verbose => true)
+
+(B_5 : ideal vars S)
+
+B_0
+
+-* 
+Separating differentials according to killed cycles, chasing socle summands
+*-
+
+kk = ZZ/(101);
+S = kk[a..c];
+
+-- generate Burch monomial ideals
+I = ideal"a5, b5, c5"
+-- J = compress (gens ((ideal vars S)^3) % I);
+L = orbitRepresentatives(S, I, (3,4)); #L
+B = select(L, l -> isBurch(l)); #B
+B_0
+
+-- Build complexes
+KK = killCycleComplexes(S, B_0, 3);
+K = koszulComplexDGA(S/B_0)
+
+-- Separate differentials
+
+length KK_2
+diffs = separateDiffs(KK_0, KK_3);
+ring diffs_1 === ring KK_0
+
+lif = map(ring KK_0, S)
+
+pushForward(lif, diffs_1)
+
+SocKK0 = cycleSummands(KK_0)
+SocKK2 = cycleSummands(KK_3)
+
+apply(diffs, i -> socleSummands(image syz i))
+numcols diffs_2
+numrows diffs_2
+
+KK_1
+(KK_0).dd_2
+(KK_1).dd_2
+(KK_1).dd_3
+(KK_1).dd_3
+
+diffs_1
+
+-* 
+Now test the "socle summand persistence" behavior in the killed cycles exact sequence
+*-
+
+kk = ZZ/(101);
+S = kk[a..c];
+
+-- generate Burch monomial ideals
+I = ideal"a5, b5, c5"
+-- J = compress (gens ((ideal vars S)^3) % I);
+L = orbitRepresentatives(S, I, (3,4,5)); #L
+B = select(L, l -> isBurch(l)); #B
+B_0
+prune socle ((ring B_0)^1 / B_0)
+-- Build complexes
+KK = killCycleComplexes(S, B_0, 4);
+K = koszulComplexDGA(S/B_0)
+
+-- Separate differentials, restricting target to the summand koszul complex
+restricted = restrictTarget(KK_0, KK_1);
+ring restricted_0 === ring KK_0
+
+cycleSummands(KK_0, Verbose => false)
+cycleSummands(KK_1)
+
+apply(restricted, i -> betti i)
+apply(restricted, i -> socleSummands(image syz i, Verbose => false))
+syz restricted_3
+
+restricted_1
+(KK_3).dd_2
+
+-- do we need to go deeper?
+
+KK = killCycleComplexes(S, B_0, 4);
+
+restricted = restrictTarget(KK_0, KK_4);
+ring restricted_1 === ring KK_0
+
+socleSummands(KK_0)
+socleSummands(KK_3)
+
+apply(restricted, i -> socleSummands(image syz i))
