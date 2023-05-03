@@ -12,14 +12,23 @@ newPackage(
 	DebuggingMode => true)
     
 export{
-    "koszulIdeals", "koszulSS", "randomBinomialIdeals", "killCycleComplexes", "complexSocSummands", "separateDiffs", "subrows", "restrictTarget", "cycleSummands"
+    "koszulIdeals", -- given an ideal, return a list of syzygies given by the matrices of the associated Koszul complex
+    "koszulSS", -- given an ideal, return a list of which syzygies from its Koszul complex have socle summands
+    "randomBinomialIdeals", -- generate random binomial ideals with specific generator degrees, number, and indeterminates
+    "killCycleComplexes", -- given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
+    "complexSocSummands", -- given an arbitrary chain complex, return a list of which syzygies have socle summands
+    "separateDiffs", -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K2 not included in K1
+    "originalDiffs" -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K1
+    "subrows", -- like the method submatrix, but for choosing a subset of rows instead of columns
+    "restrictTarget", -- similar to separateDiffs, except the target of the boundary maps of K2 are restricted to K1
+    "cycleSummands" -- fixes the socleSummands method for chain complexes from the SocleSummands package
     }
 
--- return a list of ideals given by the matrices of the koszul complex of a 
+
 koszulIdeals = method()
-koszulIdeals(Ring) := (R) -> (
-    KR := koszulComplexDGA R;
-    complex := toComplex KR;
+koszulIdeals(Ideal) := (I) -> (
+    K := koszulComplexDGA I;
+    complex := toComplex K;
     matrices := apply(length complex, i -> complex.dd_(i+1));
     apply(matrices, ker)
     )
@@ -88,6 +97,7 @@ killedCycleSummands(Ring, Ideal) := (S, I) -> (
     L := for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else continue
 )
 *-
+
 killCycleComplexes = method()
 killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
     n := numgens S;
@@ -99,7 +109,6 @@ killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
 	if i==0 then K' else K' = killCycles(K', EndDegree => i));
     
     C := KK / (K -> toComplex(K, 5))
-    -- L := for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else continue
 )
 
 randomBinomialIdeals = method()
@@ -121,8 +130,7 @@ complexSocSummands(ChainComplex) := (K) -> (
     cyc := for i from 1 to length K list syz K.dd_i;
     for i from 1 to length K-1 list if hasSocleSummand(image cyc_i) then i+2 else continue
     )
-		  
-		  
+		  	  
 separateDiffs = method()
 separateDiffs(ChainComplex, ChainComplex) := (K1, K2) -> (
     d1 := K1.dd;
@@ -151,9 +159,6 @@ originalDiffs(ChainComplex, ChainComplex) := (K1, K2) -> (
     
     ddiffs := apply(length K2-1, i -> submatrix(d2_(i+1), toList(0 .. numcols d1_(i+1) - 1)))
 )
--*
-separateDiffs(KK_0, KK_1, diffs)
-*-
 
 cycleSummands = method(Options => {Verbose => false})
 cycleSummands(ChainComplex) := o -> K -> (
@@ -165,6 +170,114 @@ cycleSummands(ChainComplex) := o -> K -> (
 
 beginDocumentation()
 
+doc ///
+    	Key
+	    	koszulIdeals
+		(koszulIdeals, Ring)
+	Headline
+	    	Returns the list of syzygies (as matrices) from the Koszul complex of a given ideal
+	Usage
+	    	koszulIdeals I
+	Inputs
+	    	I:Ideal
+		    	An ideal I over a ring
+	Outputs
+	    	:List
+		    	List of syzygies from the Koszul complex
+	Description
+	    	Text
+		    	Takes an ideal over a ring and returns a list of syzygies from the associated Koszul complex.
+	Example
+	    	S = ZZ/1993[a,b,c]
+		I = ideal("a4,b4,c4,ab3,a2c2")
+	        koszulIdeals I
+		
+///
+
+
+doc ///
+    	Key
+	    	koszulSS
+		(koszulSS, Ideal)
+	Headline
+	    	Returns a list of syzygies having socle summands
+	Usage
+	    	koszulSS I
+	Inputs
+	    	I:Ideal
+		    	An ideal over a ring
+	Outputs
+	    	:List
+		    	List of indices corresponding to syzygies having socle summands
+	Description
+	    	Text
+		    	given an ideal, return a list of which syzygies from its Koszul complex have socle summands
+		Example
+		    	S = ZZ/1993[a,b,c]
+			I = ideal("a4,b4,c4,ab3,a2c2")
+			koszulSS I
+
+///
+
+
+doc ///
+    	Key
+	        randomBinomialIdeals
+		(randomBinomialIdeals, Ring, ZZ, ZZ, ZZ)
+	Headline
+	    	Returns a random list of homogeneous binomial ideals
+	Usage
+	    	randomBinomialIdeals(R, maxdeg, maxnumgen, numideals)
+	Inputs
+	    	R:Ring
+		    	The ambient ring of the binomial ideals
+		maxdeg:ZZ
+		    	The maximal degree of any homogeneous binomial generator
+		maxnumgen:ZZ
+		    	The maximal number of binomial generators for any ideal
+		numideals:ZZ
+		    	The desired number of random binomial ideals in the list
+	Outputs
+	    	:List
+		    	List of random binomial ideals
+	Description
+	    	Text
+		        Returns a random list of a specified number of homogeneous binomial ideals of a given ring with generators of a specified maximum degree and a maximum number of such generators
+		Example
+		    	S = ZZ/101[a,b,c]
+			randomBinomialIdeals(S, 3, 4, 5)
+
+///
+
+
+doc ///
+    	Key
+	        killCycleComplexes
+		(killCycleComplexes, Ring, Ideal, ZZ)
+	Headline
+	    	Returns a list of Koszul-type complexes made sequentially exact by killing cycles
+	Usage
+	    	killCycleComplexes(S, I, m)
+	Inputs
+	    	S:Ring
+		    	The underlying ring of the Koszul complexes
+		I:Ideal
+		    	The ideal yielding the Koszul complexes
+		m:ZZ
+		    	The upper bound on homological degree for making the Koszul complexes exact
+	Outputs
+	    	:List
+		    	List of Koszul-like complexes, increasing in exactness up to homological degree specified by m
+	Description
+	    	Text
+		        Given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
+		Example
+		    	S = ZZ/101[a,b,c]
+			randomBinomialIdeals(S, 3, 4, 5)
+
+///
+
+		  
 end--
 
 S = ZZ/(101)[a..d]
@@ -433,8 +546,8 @@ lif = map(ring KK_0, S)
 
 pushForward(lif, diffs_1)
 
-SocKK0 = socleSummands(KK_0)
-SocKK2 = socleSummands(KK_3)
+SocKK0 = cycleSummands(KK_0)
+SocKK2 = cycleSummands(KK_3)
 
 apply(diffs, i -> socleSummands(image syz i))
 numcols diffs_2
@@ -461,19 +574,21 @@ I = ideal"a5, b5, c5"
 L = orbitRepresentatives(S, I, (3,4,5)); #L
 B = select(L, l -> isBurch(l)); #B
 B_0
-
+prune socle ((ring B_0)^1 / B_0)
 -- Build complexes
-KK = killCycleComplexes(S, B_0, 3);
+KK = killCycleComplexes(S, B_0, 4);
 K = koszulComplexDGA(S/B_0)
 
 -- Separate differentials, restricting target to the summand koszul complex
-restricted = restrictTarget(KK_0, KK_3);
+restricted = restrictTarget(KK_0, KK_1);
 ring restricted_0 === ring KK_0
 
-cycleSummands(KK_0)
-cycleSummands(KK_3)
+cycleSummands(KK_0, Verbose => false)
+cycleSummands(KK_1)
 
-apply(restricted, i -> socleSummands(image syz i))
+apply(restricted, i -> betti i)
+apply(restricted, i -> socleSummands(image syz i, Verbose => false))
+syz restricted_3
 
 restricted_1
 (KK_3).dd_2
