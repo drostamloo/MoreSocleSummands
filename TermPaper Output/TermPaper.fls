@@ -2,8 +2,8 @@ PWD /Users/Daniel/Desktop/MoreSocleSummands
 INPUT /usr/local/texlive/2023/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT ReesAlgebra-JSAG.tex
-OUTPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.log
+INPUT TermPaper.tex
+OUTPUT TermPaper Output/TermPaper.log
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amscls/amsart.cls
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amscls/amsart.cls
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amscls/amsart.cls
@@ -221,6 +221,41 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/eepic/epic.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/eepic/epic.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/eepic/epic.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/xypic/xy.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/xypic/xy.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/xypic/xy.sty
@@ -539,7 +574,53 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/graphics/color.sty
-INPUT Reespreamble.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/tikz-cd/tikzlibrarycd.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/tikz-cd/tikzlibrarycd.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryquotes.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryquotes.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/amssymb.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex
+INPUT ./Termpreamble.tex
+INPUT Termpreamble.tex
+INPUT ./Termpreamble.tex
+INPUT Termpreamble.tex
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/times.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/times.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/times.sty
@@ -867,10 +948,10 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.de
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.aux
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.aux
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.aux
-OUTPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.aux
+INPUT TermPaper Output/TermPaper.aux
+INPUT TermPaper Output/TermPaper.aux
+INPUT TermPaper Output/TermPaper.aux
+OUTPUT TermPaper Output/TermPaper.aux
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
@@ -902,53 +983,29 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/graphics/color.sty
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-OUTPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.pdf
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-OUTPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+OUTPUT TermPaper Output/TermPaper.pdf
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
+OUTPUT TermPaper Output/TermPaper.out
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmrc7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmrc7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT /usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmrc7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmrc7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/ueuf.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/ueuf.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/ueuf.fd
@@ -956,28 +1013,65 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/ueuf.fd
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT /usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrb7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmrc7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmrc7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrrc7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/courier/pcrrc7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.aux
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
-INPUT ReesAlgebra-JSAG Output/ReesAlgebra-JSAG.out
+INPUT TermPaper Output/TermPaper.aux
+INPUT TermPaper Output/TermPaper.out
+INPUT TermPaper Output/TermPaper.out
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb

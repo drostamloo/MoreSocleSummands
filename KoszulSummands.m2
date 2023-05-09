@@ -18,7 +18,7 @@ export{
     "killCycleComplexes", -- given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
     "complexSocSummands", -- given an arbitrary chain complex, return a list of which syzygies have socle summands
     "separateDiffs", -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K2 not included in K1
-    "originalDiffs" -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K1
+    "originalDiffs", -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K1
     "subrows", -- like the method submatrix, but for choosing a subset of rows instead of columns
     "restrictTarget", -- similar to separateDiffs, except the target of the boundary maps of K2 are restricted to K1
     "cycleSummands" -- fixes the socleSummands method for chain complexes from the SocleSummands package
@@ -26,8 +26,8 @@ export{
 
 
 koszulIdeals = method()
-koszulIdeals(Ideal) := (I) -> (
-    K := koszulComplexDGA I;
+koszulIdeals(Ring) := (R) -> (
+    K := koszulComplexDGA R;
     complex := toComplex K;
     matrices := apply(length complex, i -> complex.dd_(i+1));
     apply(matrices, ker)
@@ -166,7 +166,7 @@ cycleSummands(ChainComplex) := o -> K -> (
     mm := ideal gens ring K;
     cycles := for i from 1 to c list image syz K.dd_i;
     for i from 1 to c list socleSummands(cycles_(i-1), o)
-)
+)    
 
 beginDocumentation()
 
@@ -175,22 +175,22 @@ doc ///
 	    	koszulIdeals
 		(koszulIdeals, Ring)
 	Headline
-	    	Returns the list of syzygies (as matrices) from the Koszul complex of a given ideal
+	    	Returns the list of syzygies (as matrices) from the Koszul complex of a given ring
 	Usage
-	    	koszulIdeals I
-	Inputs
-	    	I:Ideal
-		    	An ideal I over a ring
+	    	koszulIdeals R
+    	Inputs
+	    	R:Ideal
+		    	An ring R
 	Outputs
 	    	:List
 		    	List of syzygies from the Koszul complex
 	Description
 	    	Text
-		    	Takes an ideal over a ring and returns a list of syzygies from the associated Koszul complex.
-	Example
-	    	S = ZZ/1993[a,b,c]
-		I = ideal("a4,b4,c4,ab3,a2c2")
-	        koszulIdeals I
+		    	Takes a ring and returns a list of syzygies from the associated Koszul complex.
+		Example  
+		        S = ZZ/1993[a,b,c]
+		        I = ideal("a4,b4,c4,ab3,a2c2")
+	                koszulIdeals S/I
 		
 ///
 
@@ -198,24 +198,24 @@ doc ///
 doc ///
     	Key
 	    	koszulSS
-		(koszulSS, Ideal)
+		(koszulSS, Ring)
 	Headline
 	    	Returns a list of syzygies having socle summands
 	Usage
 	    	koszulSS I
 	Inputs
-	    	I:Ideal
-		    	An ideal over a ring
+	    	R:Ideal
+		    	A ring
 	Outputs
 	    	:List
 		    	List of indices corresponding to syzygies having socle summands
 	Description
 	    	Text
-		    	given an ideal, return a list of which syzygies from its Koszul complex have socle summands
+		    	given a ring, return a list of which syzygies from its Koszul complex have socle summands
 		Example
 		    	S = ZZ/1993[a,b,c]
 			I = ideal("a4,b4,c4,ab3,a2c2")
-			koszulSS I
+			koszulSS S/I
 
 ///
 
@@ -273,11 +273,34 @@ doc ///
 		        Given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
 		Example
 		    	S = ZZ/101[a,b,c]
-			randomBinomialIdeals(S, 3, 4, 5)
-
+			I = ideal (a^4, b^5, c^3, d^6)
+			killCycleComplexes(S, I, 4)
+			
+///
+			
+doc ///
+    	Key 
+	        complexSocSummands
+	        (complexSocSummands, ChainComplex)
+	Headline
+	    	Returns a list of indices corresponding to syzygies of a chain complex having socle summands
+	Usage
+	    	complexSocSummands(K)
+	Inputs
+	    	K:ChainComplex
+		    	A chain complex
+	Outputs
+	    	:List
+		    	List of indices describing syzygies of the complex having socle summands
+	Description
+	    	Text
+		    	Given a chain complex, return a list of indices specifying syzygies which have socle summands
+		Example
+		    	S = ZZ/101[a,b,c]
+			I = ideal (a^4, b^5, c^3, d^6)
+			K = 
 ///
 
-		  
 end--
 
 S = ZZ/(101)[a..d]
@@ -398,7 +421,7 @@ tar2 = (image socSummands_1)^2
 
 -- another question: surjectivity on socles implies surjectivity of socle summands, so does it suffice for us to check the second one only?
 
--- now doing socle summand experiments with derived algebra resolution syzygies and koszul cycles
+-- now doing socle summand experiments with augmented algebra resolution syzygies and koszul cycles
 kk = ZZ/(101)
 S = kk[a..d]
 S' = kk[b..d]
@@ -604,3 +627,18 @@ socleSummands(KK_0)
 socleSummands(KK_3)
 
 apply(restricted, i -> socleSummands(image syz i))
+
+-- EXAMPLE CODE FOR PAPER
+
+kk = ZZ/(101);
+S = kk[a..e];
+I = ideal"a5, b5, c5, d5, e5";
+L = orbitRepresentatives(S, I, (3,3,3,3)); #L
+B = select(L, l -> isBurch(l)); #B
+B_0
+KK = killCycleComplexes(S, B_0, 4);
+cycleSummands KK_0
+cycleSummands KK_3
+restricted = restrictTarget(KK_0, KK_3);
+netList apply(restricted, i -> betti i)
+apply(restricted, i -> socleSummands(image syz i, Verbose => false))
