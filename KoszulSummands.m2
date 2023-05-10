@@ -631,8 +631,8 @@ apply(restricted, i -> socleSummands(image syz i))
 -- EXAMPLE CODE FOR PAPER
 
 kk = ZZ/(101);
-S = kk[a..e];
-I = ideal"a5, b5, c5, d5, e5";
+S = kk[a..d];
+I = ideal"a5, b5, c5, d5";
 L = orbitRepresentatives(S, I, (3,3,3,3)); #L
 B = select(L, l -> isBurch(l)); #B
 B_0
