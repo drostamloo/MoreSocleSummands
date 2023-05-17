@@ -16,11 +16,12 @@ export{
     "koszulSS", -- given an ideal, return a list of which syzygies from its Koszul complex have socle summands
     "randomBinomialIdeals", -- generate random binomial ideals with specific generator degrees, number, and indeterminates
     "killCycleComplexes", -- given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
-    "complexSocSummands", -- given an arbitrary chain complex, return a list of which syzygies have socle summands
-    "separateDiffs", -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K2 not included in K1
-    "originalDiffs", -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K1
+    "complexSocSummands", -- given an arbitrary chain complex, return a list of which cycles have socle summands
     "subrows", -- like the method submatrix, but for choosing a subset of rows instead of columns
-    "restrictTarget", -- similar to separateDiffs, except the target of the boundary maps of K2 are restricted to K1
+    "original", -- given a chain complex K2 and another chain complex K1 which is its summand in the first coordinate, return the boundary maps of K2 with the source restricted to the columns of K1
+    "project",
+    "previous",
+    "ignore",
     "cycleSummands" -- fixes the socleSummands method for chain complexes from the SocleSummands package
     }
 
@@ -129,43 +130,56 @@ complexSocSummands = method()
 complexSocSummands(ChainComplex) := (K) -> (
     cyc := for i from 1 to length K list syz K.dd_i;
     for i from 1 to length K-1 list if hasSocleSummand(image cyc_i) then i+2 else continue
-    )
-		  	  
-separateDiffs = method()
-separateDiffs(ChainComplex, ChainComplex) := (K1, K2) -> (
-    d1 := K1.dd;
-    d2 := K2.dd;
-    
-    ddiffs := apply(length K2-1, i -> submatrix(d2_(i+1), toList(numcols d1_(i+1) .. numcols d2_(i+1) - 1)))
-)
-
-restrictTarget = method()
-restrictTarget(ChainComplex, ChainComplex) := (K1, K2) -> (
-    d1 := K1.dd;
-    d2 := K2.dd;
-    
-    restricted := apply(length K2-1, i -> subrows(d2_(i+1), toList(0 .. numrows d1_(i+1) - 1)))
-)
+    )		  	  
 
 subrows = method()
 subrows(Matrix, List) := (M, rows) -> (
     transpose submatrix(transpose M, rows)
 )
 
-originalDiffs = method()
-originalDiffs(ChainComplex, ChainComplex) := (K1, K2) -> (
+original = method()
+original(ChainComplex, ChainComplex) := (K1, K2) -> (
     d1 := K1.dd;
     d2 := K2.dd;
     
-    ddiffs := apply(length K2-1, i -> submatrix(d2_(i+1), toList(0 .. numcols d1_(i+1) - 1)))
+    orig := apply(length K2, i -> submatrix(d2_i, toList(0 .. numcols d1_i - 1)))
+)
+
+project = method()
+project(ChainComplex, ChainComplex) := (K1, K2) -> (
+    d1 := K1.dd;
+    d2 := K2.dd;
+    
+    onTarget := apply(length K2, i -> subrows(d2_i, toList(0 .. numrows d1_i - 1)));
+    
+    onSource := apply(length onTarget, i -> submatrix(onTarget_i, toList(numcols d1_i .. numcols d2_i - 1)))
+
+)
+
+previous = method()
+previous(ChainComplex, ChainComplex) := (K1, K2) -> (
+    d1 := K1.dd;
+    d2 := K2.dd;
+    
+    onTarget := apply(length K2, i -> subrows(d2_i, toList(0 .. numrows d1_i - 1)))
+)
+
+ignore = method()
+ignore(ChainComplex, ChainComplex) := (K1, K2) -> (
+    d1 := K1.dd;
+    d2 := K2.dd;
+    
+    onTarget := apply(length K2, i -> subrows(d2_i, toList(numrows d1_i .. numrows d2_i - 1)));
+    
+    onSource := apply(length onTarget, i -> submatrix(onTarget_i, toList(numcols d1_i .. numcols d2_i - 1)))
+
 )
 
 cycleSummands = method(Options => {Verbose => false})
 cycleSummands(ChainComplex) := o -> K -> (
     c := length K;
-    mm := ideal gens ring K;
-    cycles := for i from 1 to c list image syz K.dd_i;
-    for i from 1 to c list socleSummands(cycles_(i-1), o)
+    cycles := for i from 0 to c list image syz K.dd_i;
+    for i from 0 to c list socleSummands(cycles_i, o)
 )    
 
 beginDocumentation()
@@ -272,7 +286,7 @@ doc ///
 	    	Text
 		        Given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
 		Example
-		    	S = ZZ/101[a,b,c]
+		    	S = ZZ/101[a,b,c,d]
 			I = ideal (a^4, b^5, c^3, d^6)
 			killCycleComplexes(S, I, 4)
 			
@@ -296,9 +310,142 @@ doc ///
 	    	Text
 		    	Given a chain complex, return a list of indices specifying syzygies which have socle summands
 		Example
-		    	S = ZZ/101[a,b,c]
-			I = ideal (a^4, b^5, c^3, d^6)
-			K = 
+		    	S = ZZ/101[a,b,c,d]
+			f = matrix{{a,b,c,d}}
+			K = koszul(f)
+			complexSocSummands(K)
+		      
+///
+
+doc ///
+        Key 
+	        subrows
+	        (subrows, Matrix, List)
+	Headline
+	    	Forms the submatrix given by a subset of the rows of a given matrix.
+	Usage
+	        subrows(M, rows)
+	Inputs
+	    	M:Matrix
+		rows:List
+	Outputs
+	    	:Matrix
+		    	Row-wise submatrix of M
+	Description
+	    	Text
+		    	Given M a matrix and rows a list of indices corresponding to the rows of M, form the row-wise submatrix of M given by those rows.
+		Example
+			f = matrix{{1,2,3},{4,5,6},{7,8,9}}
+			subrows(f, {1,2})
+///
+
+doc ///
+	Key 
+	        original
+	        (original, ChainComplex, ChainComplex)
+	Headline
+	    	Restricts the source of the boundary maps of a chain complex to a summand of the chain complex.
+	Usage
+	        original(K1, K2)
+	Inputs
+	    	K1:ChainComplex
+		    	A summand of the chain complex K2
+		K2:ChainComplex
+		    	A chain complex
+	Outputs
+	    	:List
+		    	List of restricted boundary maps
+	Description
+	    	Text
+		    	Given a chain complex and a summand of it, return a list consisting of the boundary maps with their source restricted to the summand
+		Example
+		    	S = ZZ/101[a,b,c,d]
+			f = matrix{{a, b, c, d}}
+			K1 = koszul(f)
+			K2 = K1 ++ K1
+			original(K1, K2)
+		      
+///
+
+doc ///
+	Key 
+	    	project
+	        (project, ChainComplex, ChainComplex)
+	Headline
+	    	Projects the image of the boundary maps of a chain complex onto a summand of the chain complex.
+	Usage
+	        project(K1, K2)
+	Inputs
+	    	K1:ChainComplex
+		    	A summand of the chain complex K2
+		K2:ChainComplex
+		    	A chain complex
+	Outputs
+	    	:List
+		    	List of restricted boundary maps
+	Description
+	    	Text
+		    	Given a chain complex and a summand of it, return a list consisting of the boundary maps with their target restricted to the summand
+		Example
+		    	S = ZZ/101[a,b,c,d]
+	                f = matrix{{a, b, c, d}}
+			K1 = koszul(f)
+			K2 = K1 ++ K1
+			project(K1, K2)
+		      
+///
+
+doc ///
+	Key 
+	        ignore
+	        (ignore, ChainComplex, ChainComplex)
+	Headline
+	        Return a list of boundary maps which ignores a given summand of the chain complex with respect to both the source and the target.
+	Usage
+	        ignore(K1, K2)
+	Inputs
+	    	K1:ChainComplex
+		    	A summand of the chain complex K2
+		K2:ChainComplex
+		    	A chain complex
+	Outputs
+	    	:List
+		    	List of restricted boundary maps
+	Description
+	    	Text
+		    	Given a chain complex and a summand of it, return a list consisting of the boundary maps where the source and target do not involve the summand.
+		Example
+		    	S = ZZ/101[a,b,c,d]
+	                f = matrix{{a, b, c, d}}
+			K1 = koszul(f)
+			K2 = K1 ++ K1
+		        ignore(K1, K2)
+		      
+///
+
+doc ///
+	Key 
+	        cycleSummands
+	        (cycleSummands, ChainComplex)
+	Headline
+	        Given a chain complex, determine the socle summand property for the cycles of the chain complex.
+	Usage
+	        cycleSummands(K)
+	Inputs
+	    	K:ChainComplex
+		    	A chain complex
+	Outputs
+	    	:List
+		        A list indicating the number of socle summands occuring in each homological degree starting from 1, and optionally the degree of the socle summands.
+	Description
+	    	Text
+		    	Given a chain complex, extract the matrices giving the cycles and use socleSummands to check for socle summands in each homological degree.
+		Example
+		        S = ZZ/101[a,b,c,d]
+		        f = matrix{{a,b,c,d}}
+		        K = koszul(f)
+		        cycleSummands(K)
+		      
 ///
 
 end--
@@ -629,16 +776,67 @@ socleSummands(KK_3)
 apply(restricted, i -> socleSummands(image syz i))
 
 -- EXAMPLE CODE FOR PAPER
+-*
+------------------------------------------------------------------------------------
+DEAR DAVID: START HERE
+------------------------------------------------------------------------------------
+*-
 
+-- Choosing ideals for tests. We will end up choosing a Burch ideal because they are nice to test on.
 kk = ZZ/(101);
 S = kk[a..d];
 I = ideal"a5, b5, c5, d5";
 L = orbitRepresentatives(S, I, (3,3,3,3)); #L
 B = select(L, l -> isBurch(l)); #B
-B_0
-KK = killCycleComplexes(S, B_0, 4);
+NB = select(L, l -> not isBurch(l)); #NB
+NG = select(L, b -> not isGolod(S/b)); #NG
+NBNG = select(NB, l -> not isGolod(S/l)); #NBNG
+tally for l in B list depth(l, S)
+
+-- Making the Koszul complex for the maximal ideal and building the resolution of the residue class field by killing cycles step by step in increasing homological degree
+KK = killCycleComplexes(S, B_1, 2);
+
+-- Check the socle summands in the cycles for the original Koszul complex and after one step of killing cycles. We will use these below to try understanding what is going on.
 cycleSummands KK_0
-cycleSummands KK_3
-restricted = restrictTarget(KK_0, KK_3);
-netList apply(restricted, i -> betti i)
-apply(restricted, i -> socleSummands(image syz i, Verbose => false))
+cycleSummands KK_1
+
+-- project() gives the projection of the boundary maps (excluding maps in the original Koszul complex) to the original Koszul complex at every homological degree
+proj = project(KK_0, KK_1);
+
+-- orig() selects the boundary maps of the original Koszul complex from KK_1
+orig = original(KK_0, KK_1);
+
+-- ignore() selects the boundary maps which have neither source nor target involving the original Koszul complex.
+ig = ignore(KK_0, KK_1);
+
+-- previous() is like project(), but it also selects maps in the original Koszul complex.
+prev = previous(KK_0, KK_1);
+
+-- Naively quotient the cycles of the original Koszul complex by the projection of the new boundary maps and check socle summands; surprisingly (to me), none of the socle summands of the original Koszul complex in any homological degree survive after this.
+apply(length KK_1 - 1, i -> socleSummands(image (syz(orig_i) % proj_(i+1)) , Verbose => false))
+
+-- Check for socle elements that are not in the  product of the maximal ideal and the image of the projections of the previous boundary maps. Note the use of previous() here instead of project(). Numerologically, I don't immediately see a pattern from this output when comparing to the outputs of cycleSummands from above.
+mm = ideal gens ring KK_0;
+apply(length KK_1 - 1, i ->  flatten degrees source (gens socle image syz orig_i % (mm*image prev_(i+1))))
+
+-- These were numerologically interesting to me. The socle summands upstairs were killed, but the socle summands in the cycles of the projected boundary maps as well as the boundary maps having nothing to do with the original Koszul complex seem to remember the socle summands they killed. Note the additive relations, especially comparing the first instance where the number of socle summands changed between KK_0 and KK_1.
+apply(length KK_1, i -> socleSummands(image syz proj_(i)))
+apply(length KK_1, i -> socleSummands(image syz ig_(i)))
+
+
+loadedPackages
+kk = ZZ/(101);
+S = kk[a..d];
+B = ideal"a5,a2b,ab2,b5,abc,c5,abd,d5"
+KK = killCycleComplexes(S, B, 2);
+cycleSummands KK_0
+cycleSummands KK_1
+proj = project(KK_0, KK_1);
+prev = previous(KK_0, KK_1);
+orig = original(KK_0, KK_1);
+ig = ignore(KK_0, KK_1);
+mm = ideal gens ring KK_0;
+apply(length KK_1 - 1, i ->  numcols compress (gens (socle image syz orig_i) % (mm*image prev_(i+1))))
+apply(length KK_1 - 1, i -> socleSummands(image (syz(orig_i) % proj_(i+1))))
+apply(length KK_1, i -> socleSummands(image syz proj_(i)))
+apply(length KK_1, i -> socleSummands(image syz ig_(i)))

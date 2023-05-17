@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.25)  9 MAY 2023 06:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.25)  17 MAY 2023 12:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -557,12 +557,12 @@ File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfarrowlength=\dimen337
 \pgfarrowwidth=\dimen338
 \pgfarrowlinewidth=\dimen339
-))) (/Users/Daniel/Library/texmf/tex/latex/local/quiver.sty
+))) (./quiver.sty
 Package: quiver 2021/01/11 quiver
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex
-(/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+(/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
 \pgfdecoratedcompleteddistance=\dimen340
 \pgfdecoratedremainingdistance=\dimen341
 \pgfdecoratedinputsegmentcompleteddistance=\dimen342
@@ -676,8 +676,7 @@ package with kernel methods
 \c@Hfootnote=\count342
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/hyperref/hpdftex.def
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2023-02-07 v7.00v Hyperref driver for pdfTeX
  (/usr/local/texlive/2023/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
@@ -685,7 +684,8 @@ with kernel methods
 )
 \Fld@listcount=\count343
 \c@bookmark@seq@number=\count344
- (/usr/local/texlive/2023/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
@@ -757,36 +757,55 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 11
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Trying to load font information for U+euf on input line 124.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 126.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] [2] [3]
-Overfull \hbox (84.0pt too wide) in paragraph at lines 231--231
-[]\OT1/pcr/m/n/10 i12 : apply(restricted, i -> socleSummands(image syz i, Verbose => false))[] 
+) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] [2] [3] [4]
+Overfull \hbox (288.0pt too wide) in paragraph at lines 290--290
+[]\OT1/pcr/m/n/10 i13 : apply(length KK_1 - 1, i ->  numcols compress (gens (socle image syz orig_i) % (mm*image prev_(i+1))))[] 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 245.
-(/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+
+Overfull \hbox (132.0pt too wide) in paragraph at lines 290--290
+[]\OT1/pcr/m/n/10 i14 : apply(length KK_1 - 1, i -> socleSummands(image (syz(orig_i) % proj_(i+1))))[] 
+ []
+
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 290--290
+[]\OT1/pcr/m/n/10 i15 : apply(length KK_1, i -> socleSummands(image syz proj_(i)))[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 290--290
+[]\OT1/pcr/m/n/10 i16 : apply(length KK_1, i -> socleSummands(image syz ig_(i)))[] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 308.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 Commutative Diagram: try the PostScript option for better results
-[4] [5] (TermPaper Output/TermPaper.aux)
+[6] (TermPaper Output/TermPaper.aux)
 Package rerunfilecheck Info: File `TermPaper.out' has not changed.
-(rerunfilecheck)             Checksum: 229325BA7FA6ADC8FA71977453251B7E;619.
+(rerunfilecheck)             Checksum: 362AA4B4BEC8CC8BBD493F97443EFB5A;682.
  ) 
 Here is how much of TeX's memory you used:
  27394 strings out of 476025
- 493507 string characters out of 5790017
- 1868388 words of memory out of 5000000
- 47195 multiletter control sequences out of 15000+600000
+ 493382 string characters out of 5790017
+ 1869388 words of memory out of 5000000
+ 47196 multiletter control sequences out of 15000+600000
  539776 words of font info for 105 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  84i,15n,89p,1421b,961s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "TermPaper Output/TermPaper.pdf" (5 pages, 157389 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "TermPaper Output/TermPaper.pdf" (6 pages, 171490 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
- 104 compressed objects within 2 object streams
+ 150 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
  22 named destinations out of 1000 (max. 500000)
  45 words of extra memory for PDF output out of 10000 (max. 10000000)
 
