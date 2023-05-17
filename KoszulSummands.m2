@@ -302,7 +302,13 @@ doc ///
 ///
 
 end--
-
+///
+restart
+uninstallPackage "KoszulSummands"
+restart
+installPackage "KoszulSummands"
+viewHelp KoszulSummands
+///
 S = ZZ/(101)[a..d]
 I = ideal (a^4, b^5, c^3, d^6);
 J = compress (gens ((ideal vars S)^4) % I);
