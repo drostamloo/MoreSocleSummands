@@ -1,6 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1683639967 "TermPaper.tex" "TermPaper Output/TermPaper.pdf" "TermPaper" 1683639969 0
-  "/Users/Daniel/Library/texmf/tex/latex/local/quiver.sty" 1662601407 1606 ac24526cc82038afe47d6f803f11170f ""
+["pdflatex"] 1684353548 "TermPaper.tex" "TermPaper Output/TermPaper.pdf" "TermPaper" 1684353550 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm" 1136768653 960 4ab65358b8406f30ef5496c8c096d22b ""
@@ -53,6 +52,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb" 1336858727 21098 d4aee7c0aac232caac5688b586b9363c ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1248133631 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb" 1136849748 50493 4ed1f7e9eba8f1f3e1ec25195460190d ""
@@ -222,11 +222,12 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1682412232 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1682412210 7883451 daa447babb6cff4f472448e416143010 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "TermPaper Output/TermPaper.aux" 1683639969 1363 31a06cc098bc63efa9ab548dfa094300 "pdflatex"
-  "TermPaper Output/TermPaper.out" 1683639969 619 229325ba7fa6adc8fa71977453251b7e "pdflatex"
-  "TermPaper.tex" 1683639967 12488 12041f39c7117544cdc36b8eeb8660ba ""
+  "TermPaper Output/TermPaper.aux" 1684353550 1423 48a93ffea77e5ddc640be6cddc0e63ee "pdflatex"
+  "TermPaper Output/TermPaper.out" 1684353550 682 362aa4b4bec8cc8bbd493f97443efb5a "pdflatex"
+  "TermPaper.tex" 1684353548 16497 233fc8bbb7ba5277e6650073d9155c22 ""
   "Termpreamble.tex" 1683639430 8539 4219708c46052a35f2de2d75bd955258 ""
   "diagrams.sty" 1683148368 323185 fad518d2ea5099744f8e653ad553a6b8 ""
+  "quiver.sty" 1683640181 1606 b07b3961e34ab8ddf2aa4cb10fd701dc ""
   (generated)
   "TermPaper Output/TermPaper.aux"
   "TermPaper Output/TermPaper.log"
