@@ -98,7 +98,8 @@ killedCycleSummands(Ring, Ideal) := (S, I) -> (
     L := for i in toList(0..5) list if hasSocleSummand(image cyc_i) then i+2 else continue
 )
 *-
-
+--DE: you don't need the last C:=. You DO need a way to specify the length of the complexes that are output,
+--you've hardwired 5 here. 
 killCycleComplexes = method()
 killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
     n := numgens S;
@@ -185,6 +186,7 @@ cycleSummands(ChainComplex) := o -> K -> (
 beginDocumentation()
 
 doc ///
+--why koszulIdeals when the input is a ring and the output is a list of matrices?? the "Input spec is missing something.
     	Key
 	    	koszulIdeals
 		(koszulIdeals, Ring)
@@ -799,9 +801,13 @@ NG = select(L, b -> not isGolod(S/b)); #NG
 NBNG = select(NB, l -> not isGolod(S/l)); #NBNG
 tally for l in B list depth(l, S)
 
--- Making the Koszul complex for the maximal ideal and building the resolution of the residue class field by killing cycles step by step in increasing homological degree
-KK = killCycleComplexes(S, B_1, 2);
 
+-- Making the Koszul complex for the maximal ideal and building the resolution of the residue class field by killing cycles step by step in increasing homological degree
+KK = killCycleComplexes(S, NBNG_1, 2);
+(ignore(KK_0, KK_1))_4
+
+
+betti oo
 -- Check the socle summands in the cycles for the original Koszul complex and after one step of killing cycles. We will use these below to try understanding what is going on.
 cycleSummands KK_0
 cycleSummands KK_1
@@ -846,3 +852,14 @@ apply(length KK_1 - 1, i ->  numcols compress (gens (socle image syz orig_i) % (
 apply(length KK_1 - 1, i -> socleSummands(image (syz(orig_i) % proj_(i+1))))
 apply(length KK_1, i -> socleSummands(image syz proj_(i)))
 apply(length KK_1, i -> socleSummands(image syz ig_(i)))
+
+
+socleSummands Module := o-> M -> (
+          mm := ideal gens ring M;
+          ss := socle M;
+          if o.Verbose == false then
+             numcols compress (gens ss % (mm*M)) 
+                else
+             flatten degrees source (gens ss % (mm*M))
+          )
+      
