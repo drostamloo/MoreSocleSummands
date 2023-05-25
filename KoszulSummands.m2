@@ -100,8 +100,8 @@ killedCycleSummands(Ring, Ideal) := (S, I) -> (
 *-
 --DE: you don't need the last C:=. You DO need a way to specify the length of the complexes that are output,
 --you've hardwired 5 here. 
-killCycleComplexes = method()
-killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
+killCycleComplexes = method(Options => {LengthLiimit => 5})
+killCycleComplexes (Ring, Ideal, ZZ) := o-> (S, I, m) -> (
     n := numgens S;
     R := S/I;
     K := koszulComplexDGA R;
@@ -803,7 +803,18 @@ tally for l in B list depth(l, S)
 
 
 -- Making the Koszul complex for the maximal ideal and building the resolution of the residue class field by killing cycles step by step in increasing homological degree
-KK = killCycleComplexes(S, NBNG_1, 2);
+KK = killCycleComplexes(S, NBNG_1, 5);
+scan(5, i-> << betti KK_i<< endl)
+R = S/NBNG_1
+F = res (coker vars R, LengthLimit => 6)
+betti F
+complexSocSummands F
+complexSocSummands KK_1
+betti KK_1
+I = NBNG_1
+R = S/I
+F = res (coker vars R, LengthLimit => 5)
+
 (ignore(KK_0, KK_1))_4
 
 
