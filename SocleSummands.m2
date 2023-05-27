@@ -295,6 +295,8 @@ colsInIdeal(Matrix, Ideal) := (M, I) -> (
     select(numcols M, j -> gens ideal (M_{j}) % I == 0)
 )
 
+-*
+--this doesn't work!
 socleSummands(ChainComplex, ZZ) := o -> (C,m) -> (
     R := ring C;
     mm := ideal gens R;
@@ -312,6 +314,66 @@ socleSummands(ChainComplex, ZZ) := o -> (C,m) -> (
 --ssc -> #ssc)
 )
 
+
+*-
+imageSocleSummands = (phi, socR) ->(
+    --phi:F \to G map of free modules
+    --socR = gens ideal(0_R):mm;
+    --the ideal of the socle in ring F
+    --compute the number and degrees of the (socle of target phi)/(m*im phi)
+    R := ring phi;
+    F := source phi;
+    G := target phi;
+
+    Rbar := R/(ideal vars R);
+    ss := modulo(G**socR, phi**vars R);
+    --ss is a non-minimal map to source G**socR, a free R-module
+    --whose basis corresponds to the socle of G. Thus numrows ss = rank socle G.
+    --the map ss surjects to the summand
+    --corresponding to socle elements in mm*(image phi), 
+    --thus rank (Rbar**ss) is the rank of the summand of the socle of G,
+    --contained in mm(image phi).
+    --the difference is thus the rank of the 'surving' socle summands.
+--elapsedTime    test := numgens prune coker ss; -- slower as the problem gets large
+     numrows ss - rank(Rbar**ss);
+    )
+///
+restart
+debug loadPackage("SocleSummands", Reload=>true)
+S = ZZ/101[a,b,c]
+mm = ideal vars S
+R = S/mm^3
+mmR = ideal vars R
+socR = gens (ideal(0_R):(ideal vars R))
+F = res (coker vars R, LengthLimit=>7)
+socleSummands(F, 5)
+phi = F.dd_6;
+--elapsedTime socleSummands(image phi) --2.4 sec for F.dd_5 of 3 vars mod mm^3
+elapsedTime (ss=imageSocleSummands(phi, socR))
+
+rank matrix (ss**(R^1/mmR))
+((vars R)**ss)
+target phi
+prune coker o147
+betti o147
+///    
+socleSummands(ChainComplex, ZZ) := o -> (C,m) -> (
+    --for i from 1+min C to m, return
+    --numgens  (socle of target C.dd_i)/(m*image C.dd_i)
+    --or the degrees of these gens (slower)
+    R := ring C;
+    mm := ideal gens R;
+    socR := gens(ideal(0_R):mm);
+    Rbar := R/mm;
+    for i from min C + 1 to m list(
+	phi := C.dd_i;
+        ss := modulo((target phi)**socR, phi**vars R);
+	    if o.Verbose == false then
+        numrows ss - rank(Rbar**ss)
+          else
+       (degrees gens prune coker ss)_0
+       )
+)
 socleSummands ChainComplex := o -> C ->  socleSummands(C, length C, o)
 
 socleSummands(Module,ZZ) := o -> (M,ell) -> (
