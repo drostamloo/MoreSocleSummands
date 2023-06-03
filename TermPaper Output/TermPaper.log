@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.25)  17 MAY 2023 12:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.25)  18 MAY 2023 09:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -761,22 +761,22 @@ LaTeX Font Info:    Trying to load font information for U+euf on input line 126.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] [2] [3] [4]
-Overfull \hbox (288.0pt too wide) in paragraph at lines 290--290
+Overfull \hbox (288.0pt too wide) in paragraph at lines 286--286
 []\OT1/pcr/m/n/10 i13 : apply(length KK_1 - 1, i ->  numcols compress (gens (socle image syz orig_i) % (mm*image prev_(i+1))))[] 
  []
 
 
-Overfull \hbox (132.0pt too wide) in paragraph at lines 290--290
+Overfull \hbox (132.0pt too wide) in paragraph at lines 286--286
 []\OT1/pcr/m/n/10 i14 : apply(length KK_1 - 1, i -> socleSummands(image (syz(orig_i) % proj_(i+1))))[] 
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 290--290
+Overfull \hbox (24.0pt too wide) in paragraph at lines 286--286
 []\OT1/pcr/m/n/10 i15 : apply(length KK_1, i -> socleSummands(image syz proj_(i)))[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 290--290
+Overfull \hbox (12.0pt too wide) in paragraph at lines 286--286
 []\OT1/pcr/m/n/10 i16 : apply(length KK_1, i -> socleSummands(image syz ig_(i)))[] 
  []
 
@@ -784,8 +784,12 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 290--290
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 308.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+Overfull \hbox (4.18471pt too wide) in paragraph at lines 302--304
+\OT1/ptm/m/n/12 mand, then so does $\OML/cmm/m/it/12 Cycles[]\OT1/cmr/m/n/12 ([])$ \OT1/ptm/m/n/12 un-less $\OML/cmm/m/it/12 i \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 n$\OT1/ptm/m/n/12 , in which case $\OML/cmm/m/it/12 Cycles[]\OT1/cmr/m/n/12 ([])$
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 315.
+(/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 Commutative Diagram: try the PostScript option for better results
@@ -802,7 +806,7 @@ Here is how much of TeX's memory you used:
  1302 hyphenation exceptions out of 8191
  84i,15n,89p,1421b,961s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "TermPaper Output/TermPaper.pdf" (6 pages, 171490 bytes).
+Output written on "TermPaper Output/TermPaper.pdf" (6 pages, 173075 bytes).
 PDF statistics:
  150 PDF objects out of 1000 (max. 8388607)
  112 compressed objects within 2 object streams

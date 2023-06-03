@@ -12,8 +12,8 @@ newPackage(
 	DebuggingMode => true)
     
 export{
-    "koszulIdeals", -- given an ideal, return a list of syzygies given by the matrices of the associated Koszul complex
-    "koszulSS", -- given an ideal, return a list of which syzygies from its Koszul complex have socle summands
+    "koszulCycles", -- given an ideal, return a list of cycles given by the matrices of the associated Koszul complex
+    "koszulSS", -- given an ideal, return a list of which cycles from its Koszul complex have socle summands
     "randomBinomialIdeals", -- generate random binomial ideals with specific generator degrees, number, and indeterminates
     "killCycleComplexes", -- given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
     "complexSocSummands", -- given an arbitrary chain complex, return a list of which cycles have socle summands
@@ -100,7 +100,7 @@ killedCycleSummands(Ring, Ideal) := (S, I) -> (
 *-
 
 killCycleComplexes = method()
-killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
+killCycleComplexes (Ring, Ideal, ZZ, ZZ) := (S, I, m, nterms) -> (
     n := numgens S;
     R := S/I;
     K := koszulComplexDGA R;
@@ -109,7 +109,7 @@ killCycleComplexes (Ring, Ideal, ZZ) := (S, I, m) -> (
     KK := for i from 0 to m list (
 	if i==0 then K' else K' = killCycles(K', EndDegree => i));
     
-    C := KK / (K -> toComplex(K, 5))
+    C := KK / (K -> toComplex(K, nterms))
 )
 
 randomBinomialIdeals = method()
@@ -186,21 +186,21 @@ beginDocumentation()
 
 doc ///
     	Key
-	    	koszulIdeals
-		(koszulIdeals, Ring)
+	    	koszulCycles
+		(koszulCycles, Ring)
 	Headline
-	    	Returns the list of syzygies (as matrices) from the Koszul complex of a given ring
+	    	Returns the list of cycles (as matrices) from the Koszul complex of a given ring.
 	Usage
 	    	koszulIdeals R
     	Inputs
-	    	R:Ideal
+	    	R:Ring
 		    	An ring R
 	Outputs
 	    	:List
-		    	List of syzygies from the Koszul complex
+		    	List of cycles from the Koszul complex of the maximal ideal of R.
 	Description
 	    	Text
-		    	Takes a ring and returns a list of syzygies from the associated Koszul complex.
+		    	Takes a ring and returns a list of cycles from the Koszul complex of the maximal ideal.
 		Example  
 		        S = ZZ/1993[a,b,c]
 		        I = ideal("a4,b4,c4,ab3,a2c2")
@@ -214,7 +214,7 @@ doc ///
 	    	koszulSS
 		(koszulSS, Ring)
 	Headline
-	    	Returns a list of syzygies having socle summands
+	    	Returns a list of cycles having socle summands, indexed by homological degree.
 	Usage
 	    	koszulSS I
 	Inputs
@@ -222,10 +222,10 @@ doc ///
 		    	A ring
 	Outputs
 	    	:List
-		    	List of indices corresponding to syzygies having socle summands
+		    	List of indices corresponding to cycles having socle summands
 	Description
 	    	Text
-		    	given a ring, return a list of which syzygies from its Koszul complex have socle summands
+		    	Given a ring, return a list of which cycles from its Koszul complex have socle summands.
 		Example
 		    	S = ZZ/1993[a,b,c]
 			I = ideal("a4,b4,c4,ab3,a2c2")
@@ -239,7 +239,7 @@ doc ///
 	        randomBinomialIdeals
 		(randomBinomialIdeals, Ring, ZZ, ZZ, ZZ)
 	Headline
-	    	Returns a random list of homogeneous binomial ideals
+	    	Returns a random list of homogeneous binomial ideals.
 	Usage
 	    	randomBinomialIdeals(R, maxdeg, maxnumgen, numideals)
 	Inputs
@@ -256,7 +256,7 @@ doc ///
 		    	List of random binomial ideals
 	Description
 	    	Text
-		        Returns a random list of a specified number of homogeneous binomial ideals of a given ring with generators of a specified maximum degree and a maximum number of such generators
+		        Returns a random list of a specified number of homogeneous binomial ideals of a given ring with generators of a specified maximum degree and a maximum number of such generators.
 		Example
 		    	S = ZZ/101[a,b,c]
 			randomBinomialIdeals(S, 3, 4, 5)
@@ -267,11 +267,11 @@ doc ///
 doc ///
     	Key
 	        killCycleComplexes
-		(killCycleComplexes, Ring, Ideal, ZZ)
+		(killCycleComplexes, Ring, Ideal, ZZ, ZZ)
 	Headline
-	    	Returns a list of Koszul-type complexes made sequentially exact by killing cycles
+	    	Returns a list of Koszul-type complexes made sequentially exact by killing cycles.
 	Usage
-	    	killCycleComplexes(S, I, m)
+	    	killCycleComplexes(S, I, m, nterms)
 	Inputs
 	    	S:Ring
 		    	The underlying ring of the Koszul complexes
@@ -279,12 +279,14 @@ doc ///
 		    	The ideal yielding the Koszul complexes
 		m:ZZ
 		    	The upper bound on homological degree for making the Koszul complexes exact
+		nterms:ZZ
+		        The homological degree up to which the infinite DGAlgebra is converted into a finite ChainComplex type.
 	Outputs
 	    	:List
 		    	List of Koszul-like complexes, increasing in exactness up to homological degree specified by m
 	Description
 	    	Text
-		        Given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer
+		        Given a ring, an ideal, and an integer, return a list of Koszul complexes made exact by killing cycles up to homological degree equaling the given integer.
 		Example
 		    	S = ZZ/101[a,b,c,d]
 			I = ideal (a^4, b^5, c^3, d^6)
@@ -308,7 +310,7 @@ doc ///
 		    	List of indices describing syzygies of the complex having socle summands
 	Description
 	    	Text
-		    	Given a chain complex, return a list of indices specifying syzygies which have socle summands
+		    	Given a chain complex, return a list of indices specifying syzygies which have socle summands.
 		Example
 		    	S = ZZ/101[a,b,c,d]
 			f = matrix{{a,b,c,d}}
